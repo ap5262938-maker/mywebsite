@@ -1,0 +1,31 @@
+body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #cfe0db;
+    font-family: Arial;
+}
+
+.container {
+    text-align: center;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+/* ADD BELOW THIS LINE */
+nav a {
+    text-decoration: none;
+    font-weight: bold;
+    margin: 10px;
+    color: darkblue;
+}
+
+nav a:hover {
+    color: orange;
+}
