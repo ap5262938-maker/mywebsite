@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Abhishek B Patil | Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0b0f1a;--card:#12182a;--i:#6366f1;--p:#ec4899;--c:#22d3ee;--a:#f59e0b}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:#fff;overflow-x:hidden}
+canvas{position:fixed;top:0;left:0;z-index:-2}
+body::after{content:"";position:fixed;inset:0;background:url('https://grainy-gradients.vercel.app/noise.svg');opacity:.05;z-index:-1}
+
+/* scrollbar */
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-thumb{background:linear-gradient(var(--i),var(--p));border-radius:10px}
+
+/* loader */
+#loader{position:fixed;inset:0;background:#000;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:9999}
+#bar{height:4px;width:0;background:linear-gradient(90deg,var(--i),var(--p));margin-top:10px;transition:2s}
+
+/* nav */
+nav{position:fixed;width:100%;top:0;display:flex;justify-content:center;gap:30px;padding:15px;background:rgba(20,20,40,.4);backdrop-filter:blur(10px);z-index:10}
+nav a{color:#fff;text-decoration:none;position:relative}
+nav a::after{content:"";position:absolute;height:2px;width:0;background:var(--c);left:0;bottom:-5px;transition:.3s}
+nav a:hover::after{width:100%}
+
+section{padding:100px 20px;max-width:1100px;margin:auto}
+.hero{text-align:center}
+.hero h1{font-family:'Syne';font-size:3rem;background:linear-gradient(90deg,var(--i),var(--p));-webkit-background-clip:text;color:transparent;animation:shimmer 3s infinite}
+@keyframes shimmer{0%{background-position:-200%}100%{background-position:200%}}
+.btn{padding:10px 20px;border-radius:20px;background:var(--i);margin:10px;display:inline-block}
+
+.card{background:var(--card);padding:20px;border-radius:15px;margin:15px 0;transition:.4s}
+.card:hover{transform:translateY(-5px);box-shadow:0 0 25px var(--p)}
+
+/* floating stats */
+.float{animation:float 4s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+
+/* skills */
+.bar{height:8px;background:#333;border-radius:10px;overflow:hidden;margin-top:10px}
+.fill{height:100%;width:0;background:linear-gradient(90deg,var(--c),var(--a));transition:2s}
+.chips span{display:inline-block;padding:5px 10px;margin:5px;border-radius:20px;background:#222}
+
+/* timeline */
+.timeline{border-left:2px solid var(--i);padding-left:20px}
+.item{margin-bottom:20px;opacity:0;transform:translateY(20px);transition:.5s}
+.item.show{opacity:1;transform:none}
+
+/* projects */
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px}
+.proj{position:relative;overflow:hidden}
+.proj::before{content:"";position:absolute;inset:0;background:linear-gradient(120deg,transparent,rgba(255,255,255,.2),transparent);transform:translateX(-100%)}
+.proj:hover::before{transform:translateX(100%);transition:1s}
+
+/* cursor */
+.cursor{width:10px;height:10px;background:var(--c);border-radius:50%;position:fixed;pointer-events:none}
+.ring{width:30px;height:30px;border:2px solid var(--c);border-radius:50%;position:fixed;pointer-events:none;transition:.1s}
+</style>
+</head>
+<body>
+
+<div id="loader"><h1>ABP</h1><div id="bar"></div></div>
+<canvas id="bg"></canvas>
+<div class="cursor" id="cursor"></div>
+<div class="ring" id="ring"></div>
+
+<nav>
+<a href="#about">About</a>
+<a href="#skills">Skills</a>
+<a href="#projects">Projects</a>
+<a href="#contact">Contact</a>
+</nav>
+
+<section class="hero">
+<h1>Abhishek B Patil</h1>
+<p>Software Developer | IoT Enthusiast</p>
+<a class="btn" href="#projects">Projects</a>
+<div class="card float">CGPA: 7.9 | Python | Flutter | IoT</div>
+</section>
+
+<section id="about"><h2>About</h2><div class="card">ECE graduate skilled in Python, Flutter, Android, IoT and problem solving.</div></section>
+
+<section id="skills"><h2>Skills</h2>
+<div class="card">Python<div class="bar"><div class="fill" data="90%"></div></div></div>
+<div class="card">Flutter<div class="bar"><div class="fill" data="80%"></div></div></div>
+<div class="chips"><span>MySQL</span><span>Arduino</span><span>REST API</span></div>
+</section>
+
+<section><h2>Experience</h2><div class="timeline">
+<div class="item">AI Intern - Inventeron Technologies (2025-26)</div>
+</div></section>
+
+<section id="projects"><h2>Projects</h2>
+<div class="grid">
+<div class="card proj">📱 Calculator App</div>
+<div class="card proj">🌱 Soil Advisor</div>
+<div class="card proj">🤖 Robot</div>
+</div></section>
+
+<section id="contact"><h2>Contact</h2>
+<div class="card">Email: abhishekbpatil741@gmail.com</div>
+<div class="card">Phone: 6362830105</div>
+</section>
+
+<script>
+// loader
+window.onload=()=>{bar.style.width='200px';setTimeout(()=>loader.style.display='none',2000)}
+
+// particles with lines
+const c=document.getElementById('bg');const x=c.getContext('2d');c.width=innerWidth;c.height=innerHeight;let p=[];for(let i=0;i<80;i++){p.push({x:Math.random()*c.width,y:Math.random()*c.height,vx:.5-Math.random(),vy:.5-Math.random()})}
+function draw(){x.clearRect(0,0,c.width,c.height);p.forEach(a=>{a.x+=a.vx;a.y+=a.vy;x.beginPath();x.arc(a.x,a.y,2,0,6.28);x.fill()});for(let i=0;i<p.length;i++){for(let j=i;j<p.length;j++){let dx=p[i].x-p[j].x;let dy=p[i].y-p[j].y;if(Math.sqrt(dx*dx+dy*dy)<100){x.beginPath();x.moveTo(p[i].x,p[i].y);x.lineTo(p[j].x,p[j].y);x.strokeStyle='rgba(255,255,255,.1)';x.stroke()}}}requestAnimationFrame(draw)}draw();
+
+// skills
+new IntersectionObserver(e=>{e.forEach(i=>{if(i.isIntersecting)i.target.style.width=i.target.getAttribute('data')})}).observe(document.querySelector('.fill'))
+
+// timeline reveal
+const items=document.querySelectorAll('.item');window.addEventListener('scroll',()=>{items.forEach(el=>{if(el.getBoundingClientRect().top<window.innerHeight-50)el.classList.add('show')})})
+
+// cursor
+const cur=document.getElementById('cursor');const ring=document.getElementById('ring');document.addEventListener('mousemove',e=>{cur.style.left=e.clientX+'px';cur.style.top=e.clientY+'px';ring.style.left=e.clientX-10+'px';ring.style.top=e.clientY-10+'px'})
+</script>
+
+</body>
+</html>
